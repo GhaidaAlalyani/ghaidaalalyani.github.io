@@ -14,7 +14,7 @@ function Footer() {
           <a href="https://linkedin.com/in/ghaidaalalyani" target="_blank" rel="noreferrer"><LinkedInIcon /></a>
           <a href="mailto:ghaidaalalyani@gmail.com"><EmailIcon /></a>
         </div>
-        <p className="footer-copy">© {new Date().getFullYear()} Ghaida Alalyani — Built with React</p>
+        <p className="footer-copy">© {new Date().getFullYear()} Ghaida Alalyani</p>
       </div>
     </footer>
   );
