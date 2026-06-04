@@ -31,39 +31,35 @@ function Contact() {
   const form = useRef<HTMLDivElement>(null);
 
   const sendEmail = (e: React.MouseEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const hasNameError    = name.trim() === '';
-    const hasEmailError   = email.trim() === '';
-    const hasMessageError = message.trim() === '';
+  const hasNameError    = name.trim() === '';
+  const hasEmailError   = email.trim() === '';
+  const hasMessageError = message.trim() === '';
 
-    setNameError(hasNameError);
-    setEmailError(hasEmailError);
-    setMessageError(hasMessageError);
+  setNameError(hasNameError);
+  setEmailError(hasEmailError);
+  setMessageError(hasMessageError);
 
-    if (hasNameError || hasEmailError || hasMessageError) return;
+  if (hasNameError || hasEmailError || hasMessageError) return;
 
-    setStatus('sending');
+  setStatus('sending');
 
-    const templateParams = {
-      name:  name.trim(),
-      email: email.trim(),
-      message:    message.trim(),
-      to_name:    'Ghaida',
-    };
-
+  if (form.current) {
     emailjs
-      .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+      .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, EMAILJS_PUBLIC_KEY)
       .then(() => {
         setStatus('success');
         setName('');
         setEmail('');
         setMessage('');
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("EmailJS Error details:", err); // Lets us log explicit structural reasons if it breaks
         setStatus('error');
       });
-  };
+  }
+};
 
   return (
     <div id="contact">
@@ -111,10 +107,11 @@ function Contact() {
 
           {/* ── Right: form ── */}
           <div className="contact_wrapper">
-            <Box ref={form} component="div" className="contact-form">
+            <Box ref={form} component="form" className="contact-form">
               <div className="form-flex">
                 <TextField
                   required
+                  name="name"
                   label="Your Name"
                   placeholder="What's your name?"
                   value={name}
@@ -124,6 +121,7 @@ function Contact() {
                 />
                 <TextField
                   required
+                  name="email"
                   label="Email"
                   placeholder="How can I reach you?"
                   value={email}
@@ -135,6 +133,7 @@ function Contact() {
 
               <TextField
                 required
+                name="message"
                 label="Message"
                 placeholder="Tell me about your project or opportunity"
                 multiline
