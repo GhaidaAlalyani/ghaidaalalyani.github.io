@@ -28,7 +28,7 @@ function Contact() {
 
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  const form = useRef<HTMLDivElement>(null);
+  const form = useRef<HTMLFormElement>(null);
 
   const sendEmail = (e: React.MouseEvent) => {
   e.preventDefault();
