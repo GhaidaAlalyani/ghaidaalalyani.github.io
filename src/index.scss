@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
-
+ 
 :root {
   --accent: #00d296;
   --accent-2: #5000ca;
@@ -14,9 +14,9 @@
   --light-surface: #ffffff;
   --light-card: #f8fbfd;
 }
-
+ 
 * { box-sizing: border-box; }
-
+ 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -24,93 +24,182 @@ body {
   font-size: 1rem;
   font-family: 'DM Sans', sans-serif;
 }
-
+ 
 h1, h2, h3, h4, h5 {
   font-family: 'Syne', sans-serif;
 }
-
+ 
 a {
   text-decoration: none;
   transition: color .15s ease;
 }
-
+ 
 .main-container {
   position: relative;
   background-color: var(--dark-bg);
   min-height: 100vh;
 }
-
+ 
+// ─── DARK MODE ────────────────────────────────────────────────
 .dark-mode {
   background-color: var(--dark-bg);
-
+ 
   p, a, h1, h2, h3, h4, h5, label, button, span {
     color: var(--text-primary);
   }
-
+ 
   a:hover { color: var(--accent); }
-
   .navigation-bar { background-color: rgba(7, 12, 18, 0.92); }
   .skills-container svg { color: var(--accent); }
-  
+ 
   .chip {
     background-color: rgba(0, 210, 150, 0.1) !important;
     border: 1px solid rgba(0, 210, 150, 0.2) !important;
     color: var(--accent) !important;
     span { color: var(--accent) !important; }
   }
-
+ 
   .vertical-timeline::before { background: var(--dark-border); }
 }
-
+ 
+// ─── LIGHT MODE ───────────────────────────────────────────────
 .light-mode {
   background-color: var(--light-bg);
-
-  p, a, h1, h2, h3, h4, h5, label, button, span { color: #0d1520; }
-  a:hover { color: var(--accent); }
-
-  .navigation-bar { background-color: rgba(240, 244, 248, 0.95); }
-  .navigation-bar svg { color: #0d1520 !important; }
-
+ 
+  // Force ALL text dark — covers any component that sets color inline
+  * {
+    color: #1a2a35 !important;
+    -webkit-text-fill-color: #1a2a35 !important;
+  }
+ 
+  // Specific overrides after the global reset
+  a:hover,
+  .section-tag,
+  .hero-badge,
+  .badge-dot,
+  .stat-value,
+  .avatar-initials,
+  .partner-name,
+  .project-link,
+  .project-tag,
+  .project-badge,
+  .footer-name,
+  .chip span,
+  .skill-icon-wrapper svg,
+  .detail-icon svg,
+  .footer .footer-links svg {
+    color: #00a375 !important;
+    -webkit-text-fill-color: #00a375 !important;
+  }
+ 
+  .badge-dot { background: #00a375; }
+ 
+  // Muted secondary text
+  .hero-description,
+  .section-sub,
+  .stat-label,
+  .partner-label,
+  .detail-label,
+  .project-period,
+  .footer-tagline,
+  .footer-copy,
+  .skill p,
+  .project p,
+  .vertical-timeline-element-content p {
+    color: #4a6070 !important;
+    -webkit-text-fill-color: #4a6070 !important;
+  }
+ 
+  // Section header gradient — override with flat dark color in light mode
+  .section-header h1 {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #0d1520 !important;
+    color: #0d1520 !important;
+  }
+ 
+  // Hero name
+  .hero-name .name-first { -webkit-text-fill-color: #0d1520 !important; color: #0d1520 !important; }
+  .hero-name .name-last  { -webkit-text-fill-color: #00a375 !important; color: #00a375 !important; }
+ 
+  // Navigation
+  .navigation-bar {
+    background-color: rgba(240, 244, 248, 0.97) !important;
+    svg { color: #0d1520 !important; -webkit-text-fill-color: #0d1520 !important; }
+    button { color: #0d1520 !important; -webkit-text-fill-color: #0d1520 !important; }
+  }
+ 
+  // Cards & surfaces
+  .skill,
+  .project,
+  .contact-detail-item {
+    background: white !important;
+    border-color: rgba(0,0,0,0.08) !important;
+  }
+  .skill:hover,
+  .project:hover { border-color: rgba(0,210,150,0.4) !important; }
+ 
+  .skill-icon-wrapper { background: rgba(0,210,150,0.1) !important; }
+  .detail-icon        { background: rgba(0,210,150,0.1) !important; }
+ 
+  // Hero stats box
+  .hero-stats {
+    background: rgba(0,0,0,0.04) !important;
+    border-color: rgba(0,0,0,0.1) !important;
+  }
+  .stat-divider { background: rgba(0,0,0,0.12) !important; }
+ 
+  // Avatar
+  .avatar-container { background: rgba(0,210,150,0.08) !important; border-color: rgba(0,210,150,0.3) !important; }
+  .avatar-ring      { border-color: rgba(0,210,150,0.2) !important; }
+ 
+  // Social links
+  .social-link {
+    background: rgba(0,0,0,0.04) !important;
+    border-color: rgba(0,0,0,0.1) !important;
+    color: #1a2a35 !important;
+    -webkit-text-fill-color: #1a2a35 !important;
+    svg { color: #00a375 !important; -webkit-text-fill-color: #00a375 !important; }
+    span { color: #1a2a35 !important; -webkit-text-fill-color: #1a2a35 !important; }
+  }
+ 
+  // Chips
   .chip {
     background-color: rgba(0, 210, 150, 0.12) !important;
     border: 1px solid rgba(0, 210, 150, 0.3) !important;
     color: #00a375 !important;
-    span { color: #00a375 !important; }
+    span { color: #00a375 !important; -webkit-text-fill-color: #00a375 !important; }
   }
-
-  .hero-name .name-first, .hero-name .name-last { color: #0d1520; }
-  .hero-badge { background: rgba(0,210,150,0.1); border-color: rgba(0,210,150,0.3); color: #00a375; }
-  .badge-dot { background: #00a375; }
-  .section-tag { background: rgba(0,210,150,0.12); color: #00a375; border-color: rgba(0,210,150,0.3); }
-  .hero-description, .section-sub { color: #4a6070 !important; }
-  .stat-label { color: #4a6070 !important; }
-  .stat-divider { background: rgba(0,0,0,0.1); }
-  .avatar-ring { border-color: rgba(0,210,150,0.2); }
-  .avatar-container { background: rgba(0,210,150,0.08); border-color: rgba(0,210,150,0.3); }
-  .avatar-initials { color: #00a375 !important; }
-  .skill { background: white; border-color: rgba(0,0,0,0.08); }
-  .skill:hover { border-color: rgba(0,210,150,0.4); }
-  .skill-icon-wrapper { background: rgba(0,210,150,0.1); color: #00a375; svg { color: #00a375 !important; } }
-  .project { background: white; border-color: rgba(0,0,0,0.08); }
-  .project:hover { border-color: rgba(0,210,150,0.4); }
-  .project-tag { background: rgba(0,210,150,0.1); color: #00a375 !important; }
-  .project-period { color: #4a6070 !important; }
-  .partner-label { color: #4a6070 !important; }
-  .project-badge { background: rgba(0,210,150,0.15); color: #00a375 !important; border-color: rgba(0,210,150,0.3); }
-  .project-link { color: var(--accent) !important; }
-  .contact-detail-item { background: white; border-color: rgba(0,0,0,0.08); }
-  .detail-label { color: #4a6070 !important; }
-  .detail-icon { background: rgba(0,210,150,0.1); svg { color: #00a375 !important; } }
-  .footer { background: #e8edf2; border-top-color: rgba(0,0,0,0.08); }
-  .footer-tagline { color: #4a6070 !important; }
-  .footer-copy { color: #4a6070 !important; }
-
-  .vertical-timeline::before { background: rgba(0,0,0,0.1); }
-  .vertical-timeline--animate .vertical-timeline-element-content.bounce-in {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+ 
+  // Project tags & badge
+  .project-tag   { background: rgba(0,210,150,0.1) !important; }
+  .project-badge { background: rgba(0,210,150,0.15) !important; border-color: rgba(0,210,150,0.3) !important; }
+ 
+  // Contact form inputs
+  .MuiOutlinedInput-root {
+    background: white !important;
+    input, textarea { color: #1a2a35 !important; -webkit-text-fill-color: #1a2a35 !important; }
+  }
+  .MuiInputLabel-root { color: #4a6070 !important; -webkit-text-fill-color: #4a6070 !important; }
+ 
+  // Timeline
+  .vertical-timeline::before { background: rgba(0,0,0,0.1) !important; }
+  .vertical-timeline-element-title    { color: #0d1520 !important; -webkit-text-fill-color: #0d1520 !important; }
+  .vertical-timeline-element-subtitle { color: #00a375 !important; -webkit-text-fill-color: #00a375 !important; }
+ 
+  // Footer
+  .footer {
+    background: #e2e8f0 !important;
+    border-top-color: rgba(0,0,0,0.08) !important;
+  }
+  .footer .footer-links a {
+    background: rgba(0,0,0,0.05) !important;
+    border-color: rgba(0,0,0,0.1) !important;
   }
 }
-
+ 
+// ─── SHARED STYLES ────────────────────────────────────────────
 .navigation-bar {
   justify-content: space-between;
   backdrop-filter: blur(12px);
@@ -126,11 +215,11 @@ a {
   }
   svg { cursor: pointer; color: var(--accent) !important; }
 }
-
+ 
 .navigation-bar-responsive {
   span, p { color: #0d1520; font-family: 'DM Sans', sans-serif; }
 }
-
+ 
 .container {
   margin-top: 64px;
   width: 100%;
@@ -138,12 +227,12 @@ a {
   flex-direction: column;
   align-items: center;
 }
-
+ 
 .items-container {
   padding: 80px 10%;
   width: 100%;
 }
-
+ 
 .section-header {
   margin-bottom: 56px;
   .section-tag {
@@ -175,7 +264,7 @@ a {
     line-height: 1.6;
   }
 }
-
+ 
 .mobile-menu-top {
   display: flex;
   justify-content: center;
@@ -183,21 +272,21 @@ a {
   gap: 5px;
   font-weight: bold;
 }
-
-// Footer
+ 
+// ─── FOOTER ───────────────────────────────────────────────────
 .footer {
   background: #040810;
   border-top: 1px solid var(--dark-border);
   padding: 48px 10%;
   text-align: center;
-
+ 
   .footer-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
   }
-
+ 
   .footer-name {
     font-family: 'Syne', sans-serif;
     font-size: 1.2rem;
@@ -205,13 +294,13 @@ a {
     color: var(--accent) !important;
     margin: 0;
   }
-
+ 
   .footer-tagline {
     color: var(--text-secondary) !important;
     font-size: 0.9rem;
     margin: 0;
   }
-
+ 
   .footer-links {
     display: flex;
     gap: 16px;
@@ -229,14 +318,14 @@ a {
       svg { color: var(--accent) !important; font-size: 1.1rem; }
     }
   }
-
+ 
   .footer-copy {
     color: var(--text-secondary) !important;
     font-size: 0.8rem;
     margin: 0;
   }
 }
-
+ 
 @media (max-width: 768px) {
   .items-container { padding: 60px 5%; }
   .section-header h1 { font-size: 2rem; }

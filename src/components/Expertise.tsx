@@ -35,7 +35,7 @@ function Expertise() {
                         <FontAwesomeIcon icon={faBrain} size="2x"/>
                     </div>
                     <h3>Machine Learning & Deep Learning</h3>
-                    <p>Designing and training neural network architectures for complex real-world tasks, including unsupervised autoencoders, regression models, and classification pipelines on diverse datasets.</p>
+                    <p>Designing and training neural network architectures for complex real world tasks, including unsupervised autoencoders, regression models, and classification pipelines on diverse datasets.</p>
                     <div className="flex-chips">
                         <span className="chip-title">Tech stack:</span>
                         {labelsFirst.map((label, index) => (
@@ -49,7 +49,7 @@ function Expertise() {
                         <FontAwesomeIcon icon={faEye} size="2x"/>
                     </div>
                     <h3>Computer Vision</h3>
-                    <p>Building visual AI systems for image understanding, document analysis, and object detection. Experienced with satellite imagery, food label recognition, and real-time seatbelt detection.</p>
+                    <p>Building visual AI systems for image understanding, document analysis, and object detection. Experienced with satellite imagery, food label recognition, and real time seatbelt detection.</p>
                     <div className="flex-chips">
                         <span className="chip-title">Tech stack:</span>
                         {labelsSecond.map((label, index) => (
@@ -63,7 +63,7 @@ function Expertise() {
                         <FontAwesomeIcon icon={faRobot} size="2x"/>
                     </div>
                     <h3>NLP & Agentic AI</h3>
-                    <p>Building language-aware AI systems including multilingual OCR, natural language to code translation, and agentic workflows that automate complex decision-making tasks.</p>
+                    <p>Building language aware AI systems including multilingual OCR, natural language to code translation, and agentic workflows that automate complex decision making tasks.</p>
                     <div className="flex-chips">
                         <span className="chip-title">Tech stack:</span>
                         {labelsThird.map((label, index) => (

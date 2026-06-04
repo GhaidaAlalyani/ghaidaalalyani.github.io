@@ -3,14 +3,13 @@ import '../assets/styles/Project.scss';
 
 const projects = [
   {
-    title: "Ghithaei — OCR Nutrition Analyzer",
+    title: "Ghithaei",
     partner: "Saudi Food & Drug Authority",
     period: "Sep 2025 – Apr 2026",
-    description: "Graduation project: an OCR pipeline that extracts nutritional data from Arabic and English food label images, helping users understand nutrition facts and SFDA regulations.",
+    description: "Graduation project: an AI powered bilingual (Arabic and English) nutrition assistant that combines OCR technology with an interactive chatbot. The system extracts nutritional data from Arabic and English food label images, analyzes and verifies nutrition facts, and helps users understand relevant SFDA regulations through conversational guidance in either language. Additionally, users can download a structured Excel report containing all extracted and analyzed nutritional information for further review and record keeping.",
     tags: ["OCR", "Arabic NLP", "Computer Vision", "Python"],
     emoji: "🥗",
-    featured: true,
-    github: "https://github.com/GhaidaAlalyani",
+    featured: true
   },
   {
     title: "Unsupervised Autoencoder for Change Detection",
@@ -19,28 +18,25 @@ const projects = [
     description: "Developed an unsupervised autoencoder to detect changes in satellite imagery, bypassing the high data and compute requirements of supervised models.",
     tags: ["Autoencoders", "Satellite Imagery", "Deep Learning", "PyTorch"],
     emoji: "🛰️",
-    featured: true,
-    github: "https://github.com/GhaidaAlalyani",
+    featured: true
   },
   {
-    title: "Data Analyst Assistant",
+    title: "Data Speak - Data Analyst Assistant",
     partner: "IBM",
     period: "Jun 2025 – Nov 2025",
-    description: "An AI-powered assistant that translates natural language commands into executable Python code, automating data analysis and broadening access to insights for non-technical users.",
+    description: "An AI powered data assistant that analyzes user provided datasets, automatically generates and executes Python code from natural language prompts, and delivers accurate insights through a conversational chatbot. The system provides dataset exploration, visualizations, and data driven answers, making advanced analytics accessible to both technical and non-technical users.",
     tags: ["Agentic AI", "NLP", "Code Generation", "FastAPI"],
     emoji: "📊",
-    featured: false,
-    github: "https://github.com/GhaidaAlalyani",
+    featured: true
   },
   {
     title: "Toddler Car Seatbelt Detection",
     partner: "SWARM Technologies",
     period: "Aug 2025 – Sep 2025",
-    description: "A real-time computer vision system to detect seatbelt usage on toddlers in vehicles, applying machine learning for accurate, fast detection to enhance child safety.",
+    description: "A real time computer vision system to detect seatbelt usage on toddlers in vehicles, applying machine learning for accurate, fast detection to enhance child safety.",
     tags: ["YOLO", "Object Detection", "Computer Vision", "Safety AI"],
     emoji: "🧒",
-    featured: false,
-    github: "https://github.com/GhaidaAlalyani",
+    featured: false
   },
 ];
 
@@ -50,7 +46,7 @@ function Project() {
         <div className="section-header">
             <span className="section-tag">Portfolio</span>
             <h1>Featured Projects</h1>
-            <p className="section-sub">Real-world AI solutions built with industry partners</p>
+            <p className="section-sub">Real world AI solutions built with industry partners</p>
         </div>
         <div className="projects-grid">
             {projects.map((project, index) => (
@@ -72,7 +68,7 @@ function Project() {
                     </div>
                     <div className="project-footer">
                         <span className="project-period">📅 {project.period}</span>
-                        <a href={project.github} target="_blank" rel="noreferrer" className="project-link">View on GitHub →</a>
+                       
                     </div>
                 </div>
             ))}

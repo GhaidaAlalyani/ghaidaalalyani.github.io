@@ -9,28 +9,68 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_SERVICE_ID  = process.env.REACT_APP_EMAILJS_SERVICE_ID || '';
+const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '';
+const EMAILJS_PUBLIC_KEY  = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || '';
 
 function Contact() {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-  const [nameError, setNameError] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [messageError, setMessageError] = useState<boolean>(false);
+  const [name, setName]       = useState('');
+  const [email, setEmail]     = useState('');
+  const [message, setMessage] = useState('');
 
-  const form = useRef();
+  const [nameError, setNameError]       = useState(false);
+  const [emailError, setEmailError]     = useState(false);
+  const [messageError, setMessageError] = useState(false);
 
-  const sendEmail = (e: any) => {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const form = useRef<HTMLDivElement>(null);
+
+  const sendEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    setNameError(name === '');
-    setEmailError(email === '');
-    setMessageError(message === '');
+
+    const hasNameError    = name.trim() === '';
+    const hasEmailError   = email.trim() === '';
+    const hasMessageError = message.trim() === '';
+
+    setNameError(hasNameError);
+    setEmailError(hasEmailError);
+    setMessageError(hasMessageError);
+
+    if (hasNameError || hasEmailError || hasMessageError) return;
+
+    setStatus('sending');
+
+    const templateParams = {
+      from_name:  name.trim(),
+      from_email: email.trim(),
+      message:    message.trim(),
+      to_name:    'Ghaida',
+    };
+
+    emailjs
+      .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+      .then(() => {
+        setStatus('success');
+        setName('');
+        setEmail('');
+        setMessage('');
+      })
+      .catch(() => {
+        setStatus('error');
+      });
   };
 
   return (
     <div id="contact">
       <div className="items-container">
         <div className="contact-layout">
+
+          {/* ── Left: info ── */}
           <div className="contact-info">
             <div className="section-header">
               <span className="section-tag">Get in Touch</span>
@@ -43,13 +83,6 @@ function Contact() {
                 <div>
                   <span className="detail-label">Email</span>
                   <span className="detail-value">ghaidaalalyani@gmail.com</span>
-                </div>
-              </a>
-              <a href="tel:+966501937843" className="contact-detail-item">
-                <div className="detail-icon"><PhoneIcon /></div>
-                <div>
-                  <span className="detail-label">Phone</span>
-                  <span className="detail-value">+966 50 193 7843</span>
                 </div>
               </a>
               <div className="contact-detail-item">
@@ -75,34 +108,31 @@ function Contact() {
               </a>
             </div>
           </div>
+
+          {/* ── Right: form ── */}
           <div className="contact_wrapper">
-            <Box
-              ref={form}
-              component="form"
-              noValidate
-              autoComplete="off"
-              className='contact-form'
-            >
-              <div className='form-flex'>
+            <Box ref={form} component="div" className="contact-form">
+              <div className="form-flex">
                 <TextField
                   required
                   label="Your Name"
                   placeholder="What's your name?"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => { setName(e.target.value); setNameError(false); }}
                   error={nameError}
-                  helperText={nameError ? "Please enter your name" : ""}
+                  helperText={nameError ? 'Please enter your name' : ''}
                 />
                 <TextField
                   required
-                  label="Email / Phone"
+                  label="Email"
                   placeholder="How can I reach you?"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => { setEmail(e.target.value); setEmailError(false); }}
                   error={emailError}
-                  helperText={emailError ? "Please enter your email or phone number" : ""}
+                  helperText={emailError ? 'Please enter your email address' : ''}
                 />
               </div>
+
               <TextField
                 required
                 label="Message"
@@ -111,15 +141,36 @@ function Contact() {
                 rows={8}
                 className="body-form"
                 value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                onChange={(e) => { setMessage(e.target.value); setMessageError(false); }}
                 error={messageError}
-                helperText={messageError ? "Please enter the message" : ""}
+                helperText={messageError ? 'Please enter a message' : ''}
               />
-              <Button variant="contained" endIcon={<SendIcon />} onClick={sendEmail}>
-                Send Message
+
+              {/* Status feedback */}
+              {status === 'success' && (
+                <div className="form-status form-status--success">
+                  <CheckCircleOutlineIcon />
+                  <span>Message sent! I'll get back to you soon.</span>
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="form-status form-status--error">
+                  <ErrorOutlineIcon />
+                  <span>Something went wrong. Please try again or email me directly.</span>
+                </div>
+              )}
+
+              <Button
+                variant="contained"
+                endIcon={<SendIcon />}
+                onClick={sendEmail}
+                disabled={status === 'sending'}
+              >
+                {status === 'sending' ? 'Sending…' : 'Send Message'}
               </Button>
             </Box>
           </div>
+
         </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ function Main() {
           </div>
           <p className="hero-description">
             AI professional specializing in Deep Learning, Computer Vision, NLP, and Agentic AI. 
-            Building intelligent systems that make a real-world impact — from satellite imagery analysis 
+            Building intelligent systems that make a real world impact — from satellite imagery analysis 
             to multilingual OCR pipelines.
           </p>
           <div className="hero-stats">
