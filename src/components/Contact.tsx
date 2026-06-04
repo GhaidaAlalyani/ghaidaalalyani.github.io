@@ -13,9 +13,9 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import emailjs from '@emailjs/browser';
 
-const EMAILJS_SERVICE_ID  = process.env.REACT_APP_EMAILJS_SERVICE_ID || '';
-const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '';
-const EMAILJS_PUBLIC_KEY  = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || '';
+const EMAILJS_SERVICE_ID  = 'service_uyrnt8j'; 
+const EMAILJS_TEMPLATE_ID = 'template_5y6gohd'; 
+const EMAILJS_PUBLIC_KEY  = 'iGggkUh2UR9m-8KWK';
 
 function Contact() {
   const [name, setName]       = useState('');
@@ -46,8 +46,8 @@ function Contact() {
     setStatus('sending');
 
     const templateParams = {
-      from_name:  name.trim(),
-      from_email: email.trim(),
+      name:  name.trim(),
+      email: email.trim(),
       message:    message.trim(),
       to_name:    'Ghaida',
     };
